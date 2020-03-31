@@ -1,6 +1,6 @@
 import numpy as np
 
-dataset = np.genfromtxt('test_data.txt',delimiter=',', dtype=int)
+dataset = np.genfromtxt('test_data.txt', delimiter=',', dtype=int)
 dataset.shape
 
 ds = dataset[:10]
