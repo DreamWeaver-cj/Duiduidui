@@ -47,7 +47,6 @@ def loop(road, res, index, i):
             loop(road, res, index + 1, j)
             road.pop()
 
-
 # 程序从这里开始执行，遍历整个数组，如果第二个值的ID1==第一个值的ID2，进入递归函数
 for i in range(ds.shape[0]):
     for j in range(i, ds.shape[0] - 1):
