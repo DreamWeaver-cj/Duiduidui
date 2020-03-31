@@ -27,7 +27,7 @@ def loop(road, res, index, i):
 
         # ，如果找到转账的下一家公司
         if ds[j][0] == ds[i][1]:
-            print(j,i)
+            print(j, i)
             # 打印出账公司
             print(ds[j][0])
             # 打印不包括入账公司的钱款路径
