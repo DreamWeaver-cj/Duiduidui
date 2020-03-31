@@ -1,12 +1,4 @@
 import numpy as np
-
-dataset = np.genfromtxt('test_data.txt', delimiter=',', dtype=int)
-dataset.shape
-
-ds = dataset[:10]
-ds = ds[:, :-1]
-ds
-
 ds = np.array([[1, 2],
                [1, 4],
                [2, 3],
@@ -35,6 +27,7 @@ def loop(road, res, index, i):
 
         # ，如果找到转账的下一家公司
         if ds[j][0] == ds[i][1]:
+            print(j,i)
             # 打印出账公司
             print(ds[j][0])
             # 打印不包括入账公司的钱款路径
@@ -52,6 +45,7 @@ def loop(road, res, index, i):
 
             # 继续寻找钱款流向的下一家公司
             loop(road, res, index + 1, j)
+            road.pop()
 
 
 # 程序从这里开始执行，遍历整个数组，如果第二个值的ID1==第一个值的ID2，进入递归函数
@@ -65,4 +59,3 @@ for i in range(ds.shape[0]):
             print('第一层循环' + str(i), str(j))
 
             loop(road, res, 2, j)
-
