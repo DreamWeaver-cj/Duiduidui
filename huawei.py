@@ -45,11 +45,15 @@ def loop(road, res, index, i):
             road.append(ds[j][0])
             # print('后路径' + str(road))
             # 如果已经找到循环，证明找到了循环路径，打印并结束
-            if ds[j][1] in road:
+            if ds[j][1] == road[0]:
                 loop_road = road
                 # print('循环路径----------------------------------------')
                 # print(loop_road)
                 # print(','.join(str(num) for num in loop_road))
+                while loop_road[0] != min(loop_road):
+                    loop_road.insert(0, loop_road[-1])
+                    loop_road.pop()
+
                 res.append(','.join(str(num) for num in loop_road))
                 return
 
@@ -69,9 +73,10 @@ for i in range(ds.shape[0]):
             # print('第一层循环' + str(i), str(j))
 
             loop(road, res, 2, j)
-print(len(res))
-print(res)
+print('finished.')
 
+print('res的长度是：'+str(len(res)))
+print('res数组是：\n'+str(res))
 
 fh = open('result_cj.txt', 'w', encoding='utf-8')
 fh.write(str(len(res))+'\n')
