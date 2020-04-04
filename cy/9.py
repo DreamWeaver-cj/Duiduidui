@@ -1,5 +1,5 @@
 # NAME：ChengYu
-# DATE：20200404-2
+# DATE：20200404-1
 # FUNC：字典查找网络全部元素
 # QSTN：网络个数不能过大，否则会爆内存；
 #       更改了“网”的定义：包含所有互通元素的集合，未检测bug，官方用例pass
@@ -55,7 +55,7 @@ def Find_Net(dic:{},ID:int):
 ####################################################
 
     Global.eye=0
-    Global.net=[]
+    Global.net=[ID]
     Global.chain=[]
     Find_chain(dic, ID)
     return Global.net,Global.eye
@@ -107,17 +107,17 @@ def FIND_NET(dic:{}):
     for ID0 in net:  #
         del dic[ID0]
 
-    return res,eye
+    return net,eye
 
 if __name__=='__main__':
 
     start1 = time.perf_counter()
-    Global.dic = Read_Data(".//ds//test_data.txt")# 读取文件保存成字典
+    Global.dic = Read_Data(".//ds//3.txt")# 读取文件保存成字典
 
     while (len(Global.dic) != 0):
         for ID in Global.dic:
             net,eye=FIND_NET(Global.dic)
-            if (len(net[0])!=0):
+            if (len(net)!=0):
                 print(eye,net)
             break
     end1 = time.perf_counter()
