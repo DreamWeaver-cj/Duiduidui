@@ -9,36 +9,38 @@ def Lst2Dic(lst:[],dic:{},n:int):
             dic[lst[i][0]] += [lst[i][1]]
 
 
-#查找链(dic:要查找的字典,ID:查找字典中的ID，tmp:传入一个含ID的列表贮存链)
+#查找链(dic:要查找的字典,ID:查找字典中的ID，tmp:传入一个含ID的列表贮存链,flag:循环条件界定标志)
 
 def Find_Net(dic:{},ID:int):
-    def Find_chain(dic: {}, ID: int, tmp: [], RES: []):
+    def Find_chain(dic: {}, ID: int, tmp: [], RES: [],flag:int):
         if (ID in dic):
             n = len(dic[ID])  # ID1发送的用户有多少
-            flag = 0  # 循环条件界定标志
+            # flag = 0  # 循环条件界定标志
             # 递归结束条件：ID不在字典中，链超过7
             for ID0 in dic[ID]:  # 遍历ID1发送的用户
                 if len(tmp)-1 <= 8:  # 如果链的长度不超标
                     if ID0 in dic:  # 如果此用户作为发送人在字典中存在
+                        flag_r=0
                         if (ID0 in RES):#如果这个链和查找的环闭合了，那么也会生成环
                             RES += tmp#把这个数组接到后面
-                            flag += 1
+                            flag_r = 1
                             tmp = []
                             break
                         else:
                             if (ID0 not in tmp[:-1]):  # 如果没闭合成环
                                 tmp += [ID0]  # 存在缓存里
-                                drop, tmp, flag = Find_chain(dic, ID0, tmp, RES)  # 递归
+                                drop, tmp, flag_r = Find_chain(dic, ID0, tmp, RES,flag)  # 递归
                                 # RES += drop
                             else:  # 如果闭合成环
                                 del tmp[:tmp.index(ID0)]  # 截断环前面的链
                                 RES += tmp
                                 tmp = []
-                                flag += 1
+                                flag_r = 1
+                        flag += flag_r
                     else:  # 链断了
-                        continue;
+                        continue
                 else:  # 超出7个
-                    continue;
+                    continue
             if flag == 0:
                 return RES, [], flag
             else:
@@ -46,7 +48,7 @@ def Find_Net(dic:{},ID:int):
         else:
             return RES, [], 0
 ####################################################
-    net,drop,flag=Find_chain(dic, ID, [ID], [])
+    net,drop,flag=Find_chain(dic, ID, [ID], [],0)
     return net,flag
 
 if __name__=='__main__':
@@ -120,7 +122,7 @@ if __name__=='__main__':
     n = ds.shape[0]#这里就尝试了第一个元素，应该遍历一下还是什么策略没想好
     Lst2Dic(ds,dic,n)#把列表转化成字典
     # print(dic)#就这样格式
-    num=5
+    num=1
     net,flag=Find_Net(dic,num)#查找链
     print(net,'|',flag)#打印链
 
