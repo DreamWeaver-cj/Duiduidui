@@ -1,14 +1,24 @@
-# NAME：ChenJing
-# DATE：202004041121
-# FUNC：查找环
-# QSTN：暂无
-
 import numpy as np
-import time
 
-dataset = np.genfromtxt('test_data.txt', delimiter=',', dtype=int)
-ds = dataset[:, :-1]
+dataset = np.genfromtxt('test_data_order.txt', delimiter=',', dtype=int)
+dataset.shape
 
+# ds = dataset[:10]
+ds = dataset[-10:, :-1]
+ds
+
+
+# ds = np.array([[1, 2],
+#                [1, 4],
+#                [2, 3],
+#                [3, 4],
+#                [4, 5],
+#                [4, 8],
+#                [5, 6],
+#                [6, 7],
+#                [7, 8],
+#                [8, 1]
+#                ])
 res = []  # 代表存所有路径的数组
 road = []  # 代表资金流动路径，A->B->C公司转账则为[A,B,C]
 loop_road = []  # 代表资金流动成环了A->B->C->A,也就是洗钱了
@@ -16,9 +26,6 @@ loop_road = []  # 代表资金流动成环了A->B->C->A,也就是洗钱了
 
 # 寻找循环路径
 # index 代表流动到第index家公司了，index最大为7，也就是最多流动7家公司
-# road 为未添加转账记录的路径
-# res 为存储环的集合
-# i 为未添加转账记录的最后一个记录的ID1
 def loop(road, res, index, i):
     # 如果路径超过7，不再递归
     if index > 7:
@@ -26,8 +33,9 @@ def loop(road, res, index, i):
 
         # 循环查找
     for j in range(ds.shape[0]):
-        # 如果找到转账的下一家公司
-        if ds[j][0] == ds[i][1] and ds[j][0] not in road:
+
+        # ，如果找到转账的下一家公司
+        if ds[j][0] == ds[i][1]:
             # 打印出账公司
             # print(ds[j][0])
             # 打印不包括入账公司的钱款路径
@@ -37,8 +45,7 @@ def loop(road, res, index, i):
             road.append(ds[j][0])
             # print('后路径' + str(road))
             # 如果已经找到循环，证明找到了循环路径，打印并结束
-
-            if ds[j][1] == road[0] and len(road) < 8:
+            if ds[j][1] == road[0]:
                 loop_road = road
                 # print('循环路径----------------------------------------')
                 # print(loop_road)
@@ -48,6 +55,7 @@ def loop(road, res, index, i):
                     loop_road.pop()
 
                 res.append(','.join(str(num) for num in loop_road))
+                road.pop()
                 return
 
             # 继续寻找钱款流向的下一家公司
@@ -55,28 +63,28 @@ def loop(road, res, index, i):
             road.pop()
 
 
-def main():
-    print('start...')
-    left_time = time.time()
-    # 程序从这里开始执行，遍历整个数组，如果第二个值的ID1==第一个值的ID2，进入递归函数
-    for loop_start in range(ds.shape[0]):
-        for loop_second in range(ds.shape[0]):
-            if ds[loop_second][0] == ds[loop_start][1]:
-                road = []
-                road.append(ds[loop_start][0])
-                road.append(ds[loop_start][1])
+# 程序从这里开始执行，遍历整个数组，如果第二个值的ID1==第一个值的ID2，进入递归函数
+for i in range(ds.shape[0]):
+    road.append(ds[i][0])
 
-                # print('第一层循环' + str(i), str(j))
+    # print('第一层循环' + str(i), str(j))
 
-                loop(road, res, 3, loop_second)
-                road.pop()
-    print('finished.')
-    fh = open('result_cj_backtrack04041128.txt', 'w', encoding='utf-8')
-    fh.write(str(len(set(res)))+'\n')
-    for i in set(res):
-        fh.write(i+'\n')
-    fh.close()
-    print('运行的总时长是：'+str(time.time()-left_time)+'秒')
+    loop(road, res, 2, i)
+    road.pop()
+print('finished.')
+
+print('res的长度是：'+str(len(res)))
+print('res数组是：\n'+str(res))
 
 
-main()
+fh = open('result_cj.txt', 'w', encoding='utf-8')
+fh.write(str(len(res))+'\n')
+for i in range(len(res)):
+    print(res[i])
+    fh.write(res[i]+'\n')
+fh.close()
+
+
+#%%
+print(set(res))
+
