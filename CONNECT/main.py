@@ -19,7 +19,7 @@ if __name__=='__main__':
         for ID in Global.dic:
             net,eye=cy.FIND_NET(Global.dic,ID)
             if (len(net)!=1):
-                # print(eye,'|',net)
+                print(eye,'|',net)
                 NET_ARRAY=np.array(net)
                 obj.run(NET_ARRAY)
             break
