@@ -1,10 +1,10 @@
 # NAME：ChengYu
-# DATE：20200405-1
+# DATE：20200405-2
 # FUNC：字典查找网络全部元素
 # QSTN：网络个数不能过大，否则会爆内存；
 #       更改了“网”的定义：包含所有互通元素的集合，未检测bug，官方用例pass
 #       eye是网眼个数估计值，不准确，但能确定网络是否只有一个环
-#       输出成txt文件,修改bug：无网眼时返回1节点-》返回空
+#       分条输出成txt文件,修改bug：无网眼时返回1节点-》返回空
 
 import numpy as np
 import time
@@ -106,9 +106,9 @@ def FIND_NET(dic:{}):
         del dic[ID]  # 删掉节点
     for ID0 in net:  #删掉网络节点
         del dic[ID0]
-    return net,eye
+    return res,eye
 
-def WRITE_TXT(ls:[],path:str):
+def WRITE_TXT(ls:[[]],path:str):
     fh = open(path, 'w', encoding='utf-8')
     for STREAM in ls:
         fh.write(str(STREAM[0]) + ',' + str(STREAM[1]) + ',' + '0' + '\n')
@@ -121,20 +121,17 @@ if __name__=='__main__':
     # FUN:提取网络保存成文件
     # COPYRIGHT@CY
     ########################################################################
-    Global.dic = Read_Data(".//ds//7.txt")# 读取文件保存成字典
+    Global.dic = Read_Data(".//ds//test_data.txt")# 读取文件保存成字典
 
     net, eye = Find_Net(Global.dic, 9)  # 查找网
 
-    fh = open('res_cy.txt', 'w', encoding='utf-8')
     while (len(Global.dic) != 0):
         for ID in Global.dic:
             net,eye=FIND_NET(Global.dic)
             if (len(net)!=1):
                 print(eye,net)
-                for STREAM in net:
-                    fh.write(str(STREAM[0]) + ',' + str(STREAM[1]) + ',' + '0' + '\n')
+                WRITE_TXT(net,'res_cy.txt')
             break
-    fh.close()
 
     #########################################################################
     # FUN:
