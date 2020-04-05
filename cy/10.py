@@ -8,7 +8,7 @@
 
 import numpy as np
 import time
-import Global
+import Global9
 
 #列表转字典(lst:被转换数据，dic:输出字典，n:数据总行数)
 def Lst2Dic(lst:[]):
@@ -29,36 +29,36 @@ def Find_Net(dic:{},ID:int):
             n = len(dic[ID])  # ID1发送的用户有多少
             # 递归结束条件：ID不在字典中，链超过7
             for ID0 in dic[ID]:  # 遍历ID1发送的用户
-                if len(Global.chain)-1 <= 100:  # 如果链的长度不超标（不起限制作用）
+                if len(Global9.chain)-1 <= 100:  # 如果链的长度不超标（不起限制作用）
                     if ID0 in dic:  # 如果此用户作为发送人在字典中存在
-                        if (ID0 not in Global.chain[:-1] and ID0 not in Global.net):  # 如果没闭合成环
-                            Global.chain += [ID0]  # 存在缓存里
+                        if (ID0 not in Global9.chain[:-1] and ID0 not in Global9.net):  # 如果没闭合成环
+                            Global9.chain += [ID0]  # 存在缓存里
                             Find_chain(dic, ID0)  # 递归
 
                         else: #闭合成环了
 
-                            Global.net += Global.chain  # 把这个数组接到后面
-                            Global.eye += 1  # 网孔加一
-                            Global.chain = []  # 删除tmp保存的环，就是转移到RES里面，然后存新环了
+                            Global9.net += Global9.chain  # 把这个数组接到后面
+                            Global9.eye += 1  # 网孔加一
+                            Global9.chain = []  # 删除tmp保存的环，就是转移到RES里面，然后存新环了
 
                     else:  # 链断了
                         continue
                 else:  # 超出n个了
                     continue
 
-            if len(Global.chain)!=0:#全遍子树历完了还没有就删除这个父节点
-                del Global.chain[-1]
+            if len(Global9.chain)!=0:#全遍子树历完了还没有就删除这个父节点
+                del Global9.chain[-1]
             return
 
         else:
             return
 ####################################################
 
-    Global.eye=0
-    Global.net=[]
-    Global.chain=[ID]
+    Global9.eye=0
+    Global9.net=[]
+    Global9.chain=[ID]
     Find_chain(dic, ID)
-    return Global.net,Global.eye
+    return Global9.net,Global9.eye
 
 #求网络总和（net:网络）
 def Net_Sum(net:[]):
@@ -121,14 +121,14 @@ if __name__=='__main__':
     # FUN:提取网络保存成文件
     # COPYRIGHT@CY
     ########################################################################
-    Global.dic = Read_Data(".//ds//test_data.txt")# 读取文件保存成字典
+    Global9.dic = Read_Data("../dataset/test_data.txt")# 读取文件保存成字典
 
-    net, eye = Find_Net(Global.dic, 9)  # 查找网
+    net, eye = Find_Net(Global9.dic, 9)  # 查找网
 
     fh = open('res_cy.txt', 'w', encoding='utf-8')
-    while (len(Global.dic) != 0):
-        for ID in Global.dic:
-            net,eye=FIND_NET(Global.dic)
+    while (len(Global9.dic) != 0):
+        for ID in Global9.dic:
+            net,eye=FIND_NET(Global9.dic)
             if (len(net)!=1):
                 print(eye,net)
                 for STREAM in net:

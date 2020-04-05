@@ -1,10 +1,7 @@
 # NAME：ChengYu
-# DATE：20200405-2
-# FUNC：字典查找网络全部元素
-# QSTN：网络个数不能过大，否则会爆内存；
-#       更改了“网”的定义：包含所有互通元素的集合，未检测bug，官方用例pass
-#       eye是网眼个数估计值，不准确，但能确定网络是否只有一个环
-#       分条输出成txt文件,修改bug：无网眼时返回1节点-》返回空
+# DATE：20200405-3
+# FUNC：工具探针
+# QSTN：
 
 import numpy as np
 import time
@@ -123,15 +120,9 @@ if __name__=='__main__':
     ########################################################################
     Global9.dic = Read_Data("../dataset/test_data.txt")# 读取文件保存成字典
 
-    net, eye = Find_Net(Global9.dic, 9)  # 查找网
-
-    while (len(Global9.dic) != 0):
-        for ID in Global9.dic:
-            net,eye=FIND_NET(Global9.dic,ID)
-            if (len(net)!=0):
-                print(eye,net)
-                # WRITE_TXT(net,'res_cy.txt')
-            break
+    net,eye=FIND_NET(Global9.dic,6002)
+    print(eye,"|",net)
+    WRITE_TXT(net,'res_cy.txt')
 
     #########################################################################
     # FUN:
