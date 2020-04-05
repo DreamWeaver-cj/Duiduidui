@@ -1,29 +1,28 @@
 import cy
 import Global
 import time
+import FindLoop
+import numpy as np
+
+
+# COPYRIGHT@Duiduidui
+# UPDATE@20200405
 
 if __name__=='__main__':
+
     start1 = time.perf_counter()
-    ########################################################################
-    # FUN:提取网络保存成文件
-    # COPYRIGHT@CY
-    ########################################################################
-    Global.dic = cy.READ_DATA(".//ds//test_data.txt")# 读取文件保存成字典
+
+    obj = FindLoop.FindLoop()
+    Global.dic = cy.READ_DATA("../dataset/test_data.txt")# 读取文件保存成字典
 
     while (len(Global.dic) != 0):
         for ID in Global.dic:
             net,eye=cy.FIND_NET(Global.dic,ID)
             if (len(net)!=1):
                 print(eye,'|',net)
-                cy.WRITE_TXT(net,'res_cy.txt')
-
+                NET_ARRAY=np.array(net)
+                obj.run(NET_ARRAY)
             break
-    #########################################################################
-    # FUN:
-    # COPYRIGHT@
-    #########################################################################
-
-
 
     end1 = time.perf_counter()
     print("final is in : %s Seconds " % (end1 - start1))
