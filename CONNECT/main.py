@@ -6,7 +6,7 @@ import numpy as np
 
 
 # COPYRIGHT@Duiduidui
-# UPDATE@20200405
+# UPDATE@20200406
 
 if __name__=='__main__':
 
@@ -21,7 +21,7 @@ if __name__=='__main__':
                 # print(eye,'|',net)
                 NET_ARRAY=np.array(net)
                 LEN,CIRCLE=cj.main(ds=NET_ARRAY)
-                # print(CIRCLE,LEN)
+                print(CIRCLE,LEN)
                 fh = open('../res/result_backtrack04061413.txt', 'a', encoding='utf-8')  # a 是追加的意思
                 for i in CIRCLE:
                     fh.write(i + '\n')
