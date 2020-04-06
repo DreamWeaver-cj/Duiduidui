@@ -1,7 +1,7 @@
 import cy
 import Global
 import time
-import FindLoop
+import FindLoop0406 as cj
 import numpy as np
 
 
@@ -12,7 +12,6 @@ if __name__=='__main__':
 
     start1 = time.perf_counter()
     ######################################################################################################
-    obj = FindLoop.FindLoop()
     Global.dic = cy.READ_DATA("../dataset/test_data.txt")# 读取文件保存成字典
 
     while (len(Global.dic) != 0):
@@ -21,7 +20,9 @@ if __name__=='__main__':
             if (len(net)!=1):
                 print(eye,'|',net)
                 NET_ARRAY=np.array(net)
-                obj.run(NET_ARRAY)
+
+                LEN,CIRCLE=cj.main(ds=NET_ARRAY)
+                cy.WRITE_TXT(CIRCLE,"net.txt",'a')
             break
     ######################################################################################################
     end1 = time.perf_counter()

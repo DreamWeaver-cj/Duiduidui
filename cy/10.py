@@ -61,8 +61,8 @@ def Find_Net(dic:{},ID:int):
     return Global9.net,Global9.eye
 
 #求网络总和（net:网络）
-def Net_Sum(net:[]):
-    return [sum(net)]
+def Net_Sum(Net:[]):
+    return [sum(Net)]
 
 #判断是否合法（net:网络，find：已经找到的网络和）[P.S.这个判断方式十分粗暴，就是判断网络节点总和相等就判定查找过]
 def IsIllegal(net:[],find:[],eye:int):
