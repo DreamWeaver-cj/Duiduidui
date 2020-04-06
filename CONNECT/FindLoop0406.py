@@ -1,5 +1,5 @@
 # NAME：ChenJing
-# DATE：202004061210
+# DATE：202004061210-1
 # FUNC：查找环子程序
 # QSTN：暂无
 
@@ -30,7 +30,7 @@ def loop(road, res, index, i, ds):
                     loop_road.insert(0, loop_road[-1])
                     loop_road.pop()
 
-                lyx.choice(loop_road)
+                lyx.choice(loop_road)  #将循环路径保存在不同的字典中
 
                 res.append(','.join(str(num) for num in loop_road))
                 #for num in loop_road:
