@@ -16,7 +16,7 @@ import numpy as np
 # 输出环的个数，并将环存在txt中
 '''
 class FindLoop():
-    def run(self, ds=np.genfromtxt("../dataset/test_data.txt", delimiter=',', dtype=int)[:, :-1]):
+    def run(self, ds=np.genfromtxt('../dataset/test_cy/10.txt', delimiter=',', dtype=int)[:, :-1]):
         print('run.')
         self.ds = ds
         res = []  # 代表存所有路径的数组
