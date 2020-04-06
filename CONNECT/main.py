@@ -4,7 +4,6 @@ import time
 import FindLoop0406 as cj
 import numpy as np
 
-
 # COPYRIGHT@Duiduidui
 # UPDATE@20200406
 
@@ -31,4 +30,5 @@ if __name__=='__main__':
     ######################################################################################################
 
     end1 = time.perf_counter()
-    print("final is in : %s Seconds " % (end2 - start1))
+    print("final is in : %s Seconds " % (end1 - start1))
+

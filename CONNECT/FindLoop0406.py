@@ -6,6 +6,7 @@
 import numpy as np
 import time
 
+import lyx
 
 # 寻找循环路径
 # index 代表流动到第index家公司了，index最大为7，也就是最多流动7家公司
@@ -29,7 +30,12 @@ def loop(road, res, index, i, ds):
                     loop_road.insert(0, loop_road[-1])
                     loop_road.pop()
 
+                lyx.choice(loop_road)
+
                 res.append(','.join(str(num) for num in loop_road))
+                #for num in loop_road:
+                    #res.append(num)
+                #res.append(loop_road)
                 return
 
             # 继续寻找钱款流向的下一家公司
@@ -57,7 +63,6 @@ def main(ds=np.genfromtxt('../dataset/test_data.txt', delimiter=',', dtype=int)[
                 road.pop()
 
     return len(set(res)), set(res)
-
 
 if __name__ == '__main__':
     a, b = main()
