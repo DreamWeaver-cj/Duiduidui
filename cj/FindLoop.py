@@ -15,8 +15,10 @@ import numpy as np
 # 输入二维数组
 # 输出环的个数，并将环存在txt中
 '''
+
+
 class FindLoop():
-    def run(self, ds=np.genfromtxt('../dataset/test_cy/10.txt', delimiter=',', dtype=int)[:, :-1]):
+    def run(self, ds=np.genfromtxt('../dataset/test_data.txt', delimiter=',', dtype=int)[:, :-1]):
         print('run.')
         self.ds = ds
         res = []  # 代表存所有路径的数组
@@ -36,9 +38,7 @@ class FindLoop():
                     self.loop(road, res, 3, loop_second)
                     road.pop()
         print('finished.')
-        fh = open('../res/result_cj_backtrack04051000.txt', 'w', encoding='utf-8')  # a 是追加的意思
-        fh.write(str(len(set(res))) + '\n')
-        fh = open('../res/result_backtrack04051000.txt', 'a', encoding='utf-8')  # a 是追加的意思
+        fh = open('../res/result_backtrack04051001.txt', 'a', encoding='utf-8')  # a 是追加的意思
         for i in set(res):
             fh.write(i + '\n')
         fh.close()
