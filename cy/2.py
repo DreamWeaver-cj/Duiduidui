@@ -55,7 +55,7 @@ if __name__=='__main__':
     tmp = []  # 存储链（链：结果的一条）
 
     # 读取文件保存成数组
-    dataset = np.array(np.genfromtxt('test_data.txt', delimiter=',', dtype=int))
+    dataset = np.array(np.genfromtxt("../dataset/test_data.txt", delimiter=',', dtype=int))
 
     print(dataset.shape)
     ##############
@@ -119,10 +119,10 @@ if __name__=='__main__':
     #############
     n = ds.shape[0]#这里就尝试了第一个元素，应该遍历一下还是什么策略没想好
     Lst2Dic(ds,dic,n)#把列表转化成字典
-    # print(dic)#就这样格式
+    print(dic)#就这样格式
     num=5
     net,flag=Find_Net(dic,num)#查找链
-    print(net,'|',flag)#打印链
+    # print(net,'|',flag)#打印链
 
 
 
