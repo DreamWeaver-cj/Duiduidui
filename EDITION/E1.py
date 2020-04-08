@@ -3,7 +3,7 @@
 #
 
 import numpy as np
-import time
+# import time
 
 global eye
 global chain
@@ -249,7 +249,7 @@ def choice(loop_road):
 #保存循环转账路径
 #分别对不同长度的字典按key值排序，然后按序保存在文件中
 
-def mysort():
+def mysort(path:str):
     global dic3
     global dic4
     global dic5
@@ -257,7 +257,7 @@ def mysort():
     global dic7
     global num
 
-    fh = open('../res/result_backtrack04061413.txt', 'a', encoding='utf-8')  # a 是追加的意思
+    fh = open(path, 'a', encoding='utf-8')  # a 是追加的意思
 
     #num = len(dic3) + len(dic4) + len(dic5) + len(dic6) + len(dic7)
     for i in dic3:
@@ -312,9 +312,9 @@ def mysort():
 
 if __name__=='__main__':
 
-    start1 = time.perf_counter()
+    # start1 = time.perf_counter()
     ######################################################################################################
-    dic = READ_DATA("../dataset/test_data.txt")# 读取文件保存成字典
+    dic = READ_DATA("/data/test_data.txt")# 读取文件保存成字典
     while (len(dic) != 0):
         for ID in dic:
             net,eye=FIND_NET(dic,ID)
@@ -323,9 +323,9 @@ if __name__=='__main__':
                 LEN,CIRCLE=main(ds=NET_ARRAY)
             break
 
-    mysort()  #对循环路径排序并保存到文件
+    mysort('/projects/student/result.txt')  #对循环路径排序并保存到文件
     ######################################################################################################
-    end1 = time.perf_counter()
-    print("final is in : %s Seconds " % (end1 - start1))
+    # end1 = time.perf_counter()
+    # print("final is in : %s Seconds " % (end1 - start1))
 
 
