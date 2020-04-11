@@ -187,7 +187,7 @@ def Is_EMPTY_NODE():
     else:
         return True
 
-#查找环
+# 查找环
 def FIND_CIR(ID0):
     global chain
     global node
@@ -211,9 +211,10 @@ def FIND_CIR(ID0):
                 break
     return True
 
+
 if __name__=='__main__':
     start1 = time.perf_counter()
-    READ_DATA("../dataset/test_cy/7.txt")#../dataset/test_cy/6.txt
+    READ_DATA(f"../dataset/test_cy/10.txt")#../dataset/test_cy/6.txt
         # end1 = time.perf_counter()
         # for ID in dic:
         #     print(ID)

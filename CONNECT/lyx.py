@@ -4,6 +4,7 @@
 # QSTN：暂无
 
 import Global
+import time
 
 res_tmp = [] #
 
@@ -56,7 +57,7 @@ def choice(loop_road):
 #分别对不同长度的字典按key值排序，然后按序保存在文件中
 
 def mysort():
-    fh = open('../res/result_backtrack04061413.txt', 'a', encoding='utf-8')  # a 是追加的意思
+    fh = open('../dataset/28w/result.txt', 'a', encoding='utf-8')  # a 是追加的意思
 
     #num = len(Global.dic3) + len(Global.dic4) + len(Global.dic5) + len(Global.dic6) + len(Global.dic7)
     for i in Global.dic3:
@@ -107,3 +108,9 @@ def mysort():
             fh.write('\n')
 
     fh.close()
+
+
+if __name__ == '__main__':
+    l_time = time.time()
+    mysort()
+    print('run time is :'+str(time.time()-l_time))
