@@ -15,7 +15,7 @@ import lyx
 # node 为未添加转账记录的最后一个记录的ID1
 # loop_road  # 代表资金流动成环了A->B->C->A,也就是洗钱了
 
-def loop(road, res, index, node, dic, append_flag):
+def loop(road, res, index, node, dic):
     # 如果路径超过7，不再递归
     if index > 7:
         return
@@ -40,7 +40,7 @@ def loop(road, res, index, node, dic, append_flag):
             else:
                 road.append(sub_node)
                 # append_flag[index + 1] = True
-                loop(road, res, index + 1, sub_node, dic, append_flag)
+                loop(road, res, index + 1, sub_node, dic)
                 # if append_flag[index + 1]:
                 road.pop()
                 #    append_flag[index + 1] = False
@@ -59,21 +59,16 @@ def main(path='../dataset/test_data.txt'):
     road = []  # 代表资金流动路径，A->B->C公司转账则为[A,B,C]
     # append_flag = [False] * 9
     # 程序从这里开始执行，遍历整个数组，如果第二个值的ID1==第一个值的ID2，进入递归函数
-    while dic:
-        for key, index in enumerate(dic):
+    for key, index in enumerate(dic):
 
-            del road[:]
-            road.append(index)
-            for node in dic[index]:
-                road.append(node)
-                loop(road, res, 2, node, dic, append_flag)
-                road.pop()
+        del road[:]
+        road.append(index)
+        for node in dic[index]:
+            road.append(node)
+            loop(road, res, 2, node, dic)
             road.pop()
-            if key == 0:
-                break
-        del dic[index]
-
-    return len(set(res)), set(res)
+        road.pop()
+    return len((res)), (res)
 
 
 if __name__ == '__main__':
